@@ -19,8 +19,13 @@ const PORT = process.env.PORT || 3000;
 // Initialize Gemini AI
 const ai = new GoogleGenAI({});
 
-// Middleware
-app.use(cors());
+// CORS Configuration - Allow all origins for demo project
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -109,6 +114,9 @@ Important: Return ONLY the JSON object, no additional text or formatting.
 }
 
 const notesProcessor = new MeetingNotesProcessor(ai);
+
+// Handle preflight requests
+app.options('*', cors());
 
 // Routes
 app.get('/', (req, res) => {
