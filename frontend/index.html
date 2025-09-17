@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Minutes Extractor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-robot"></i>
+                    Meeting Minutes Extractor
+                </h1>
+                <p class="subtitle">AI-powered extraction of summaries, decisions, and action items</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="card">
+                    <h2 class="section-title">
+                        <i class="fas fa-upload"></i>
+                        Input Meeting Notes
+                    </h2>
+                    
+                    <!-- Tab Navigation -->
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="text">
+                            <i class="fas fa-keyboard"></i>
+                            Type Text
+                        </button>
+                        <button class="tab-btn" data-tab="file">
+                            <i class="fas fa-file-upload"></i>
+                            Upload File
+                        </button>
+                    </div>
+
+                    <!-- Text Input Tab -->
+                    <div class="tab-content active" id="text-tab">
+                        <textarea 
+                            id="meeting-text" 
+                            placeholder="Paste your meeting notes here...
+
+Example:
+Team Sync – May 26
+
+- We'll launch the new product on June 10.
+- Ravi to prepare onboarding docs by June 5.
+- Priya will follow up with logistics team on packaging delay.
+- Beta users requested a mobile-first dashboard."
+                            rows="12"
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="char-count">0</span> / 50,000 characters
+                        </div>
+                    </div>
+
+                    <!-- File Upload Tab -->
+                    <div class="tab-content" id="file-tab">
+                        <div class="file-upload-area" id="file-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Drop your .txt file here</h3>
+                            <p>or click to browse</p>
+                            <input type="file" id="file-input" accept=".txt" hidden>
+                        </div>
+                        <div class="file-info" id="file-info" style="display: none;">
+                            <i class="fas fa-file-text"></i>
+                            <span id="file-name"></span>
+                            <button class="remove-file" id="remove-file">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="process-btn">
+                            <i class="fas fa-magic"></i>
+                            Extract Meeting Minutes
+                        </button>
+                        <button class="btn btn-secondary" id="clear-btn">
+                            <i class="fas fa-broom"></i>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <div class="card">
+                    <h2 class="section-title">
+                        <i class="fas fa-brain"></i>
+                        Extracted Results
+                    </h2>
+
+                    <!-- Summary -->
+                    <div class="result-block">
+                        <h3 class="result-title">
+                            <i class="fas fa-file-alt"></i>
+                            Summary
+                        </h3>
+                        <div class="summary-content" id="summary-content"></div>
+                    </div>
+
+                    <!-- Decisions -->
+                    <div class="result-block">
+                        <h3 class="result-title">
+                            <i class="fas fa-check-circle"></i>
+                            Key Decisions
+                        </h3>
+                        <ul class="decisions-list" id="decisions-list"></ul>
+                    </div>
+
+                    <!-- Action Items -->
+                    <div class="result-block">
+                        <h3 class="result-title">
+                            <i class="fas fa-tasks"></i>
+                            Action Items
+                        </h3>
+                        <div class="action-items" id="action-items"></div>
+                    </div>
+
+                    <!-- Export Options -->
+                    <div class="export-section">
+                        <button class="btn btn-outline" id="copy-json">
+                            <i class="fas fa-copy"></i>
+                            Copy JSON
+                        </button>
+                        <button class="btn btn-outline" id="download-json">
+                            <i class="fas fa-download"></i>
+                            Download JSON
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div class="loading" id="loading" style="display: none;">
+                <div class="loading-content">
+                    <div class="loading-spinner"></div>
+                    <p>🤖 AI is analyzing your meeting notes...</p>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="progress-percentage">0%</span>
+                            <span id="estimated-time">Estimated: 6-10 seconds</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Processing Steps -->
+                    <div class="processing-steps">
+                        <div class="step active" id="step-1">
+                            <i class="fas fa-search"></i>
+                            <span>Analyzing content</span>
+                        </div>
+                        <div class="step" id="step-2">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Extracting insights</span>
+                        </div>
+                        <div class="step" id="step-3">
+                            <i class="fas fa-list-check"></i>
+                            <span>Organizing results</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Fun Facts -->
+                    <div class="processing-tip">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="processing-tip-text">Did you know? Our AI processes over 1000 words per second!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div class="error-message" id="error-message" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Something went wrong</h3>
+                <p id="error-text"></p>
+                <button class="btn btn-secondary" id="retry-btn">Try Again</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Meeting Minutes Extractor. Powered by Google Gemini AI. Made by <a href="https://github.com/Arittra-Bag" style="color: aqua;">Arittra Bag</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
