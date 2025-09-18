@@ -72,34 +72,7 @@ curl -X POST http://localhost:3000/process-meeting \
   -F "file=@samples/meeting1.txt"
 ```
 
-### Option 3: Test with PowerShell (Windows)
-
-**Raw Text:**
-```powershell
-$body = @{
-    text = @"
-Team Sync – May 26
-
-- We'll launch the new product on June 10.
-- Ravi to prepare onboarding docs by June 5.
-- Priya will follow up with logistics team on packaging delay.
-- Beta users requested a mobile-first dashboard.
-"@
-} | ConvertTo-Json
-
-Invoke-RestMethod -Uri "http://localhost:3000/process-meeting" -Method POST -Body $body -ContentType "application/json"
-```
-
-**File Upload:**
-```powershell
-$form = @{
-    file = Get-Item "samples/meeting1.txt"
-}
-
-Invoke-RestMethod -Uri "http://localhost:3000/process-meeting" -Method POST -Form $form
-```
-
-### Option 4: Test with Postman
+### Option 3: Test with Postman
 1. **Method**: POST
 2. **URL**: `http://localhost:3000/process-meeting`
 3. **Headers**: `Content-Type: application/json`
