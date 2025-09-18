@@ -16,7 +16,7 @@ const sampleText = `Team Sync – May 26
 - Beta users requested a mobile-first dashboard.`;
 
 async function testAPI() {
-  console.log('🧪 Testing Meeting Minutes Extractor API\n');
+  console.log('Testing Meeting Minutes Extractor API...\n');
 
   try {
     // Test 1: Raw text processing
@@ -31,17 +31,17 @@ async function testAPI() {
 
     if (response1.ok) {
       const result1 = await response1.json();
-      console.log('✅ Raw text test passed');
+      console.log('Raw text test PASSED!');
       console.log('Summary:', result1.data.summary);
       console.log('Decisions:', result1.data.decisions);
       console.log('Action Items:', result1.data.actionItems);
     } else {
       const error1 = await response1.json();
-      console.log('❌ Raw text test failed:', error1);
+      console.log('Raw text test FAILED:', error1);
     }
 
   } catch (error) {
-    console.log('❌ Test failed with error:', error.message);
+    console.log('Test failed with error:', error.message);
   }
 
   console.log('\n' + '='.repeat(50) + '\n');
@@ -62,17 +62,17 @@ async function testAPI() {
 
     if (response2.ok) {
       const result2 = await response2.json();
-      console.log('✅ File upload test passed');
+      console.log('File upload test PASSED!');
       console.log('Summary:', result2.data.summary);
       console.log('Decisions:', result2.data.decisions);
       console.log('Action Items:', result2.data.actionItems);
     } else {
       const error2 = await response2.json();
-      console.log('❌ File upload test failed:', error2);
+      console.log('File upload test FAILED:', error2);
     }
 
   } catch (error) {
-    console.log('❌ File test failed with error:', error.message);
+    console.log('File test failed with error:', error.message);
   }
 
   console.log('\n' + '='.repeat(50) + '\n');
@@ -91,16 +91,16 @@ async function testAPI() {
 
     if (!response3.ok) {
       const error3 = await response3.json();
-      console.log('✅ Error handling test passed:', error3.message);
+      console.log('Error handling test PASSED:', error3.message);
     } else {
-      console.log('❌ Error handling test failed: Should have returned an error');
+      console.log('Error handling test FAILED: Should have returned an error');
     }
 
   } catch (error) {
-    console.log('❌ Error handling test failed:', error.message);
+    console.log('Error handling test FAILED:', error.message);
   }
 
-  console.log('\n🎉 API testing completed!');
+  console.log('\nAPI testing completed!');
 }
 
 // Check if server is running before testing
@@ -108,13 +108,13 @@ async function checkServer() {
   try {
     const response = await fetch(BASE_URL);
     if (response.ok) {
-      console.log('✅ Server is running, starting tests...\n');
+      console.log('Server is running, starting tests...\n');
       await testAPI();
     } else {
-      console.log('❌ Server responded with error:', response.status);
+      console.log('Server responded with error:', response.status);
     }
   } catch (error) {
-    console.log('❌ Server is not running. Please start the server with: npm start');
+    console.log('Server is not running. Please start the server with: npm start or npm run dev');
     console.log('   Then run tests with: npm test');
   }
 }

@@ -240,8 +240,8 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Meeting Minutes Extractor API running on port ${PORT}`);
-  console.log(`📝 API Documentation: http://localhost:${PORT}`);
+  console.log(`Meeting Minutes Extractor API running on port ${PORT}`);
+  console.log(`Frontend Interface: http://localhost:${PORT}`);
 });
 
 export default app;
