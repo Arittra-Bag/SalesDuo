@@ -8,7 +8,7 @@ export const options = {
     { duration: "30s", target: 0 },  // ramp down to 0
   ],
   thresholds: {
-    http_req_duration: ["p(95)<25000"], // 95% of requests < 25s (AI realistic)
+    http_req_duration: ["p(95)<15000"], // 95% of requests < 15s (AI realistic)
     checks: ["rate>0.95"],              // at least 95% of checks must pass
   },
 };
