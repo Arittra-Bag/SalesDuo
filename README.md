@@ -50,7 +50,7 @@ For development with auto-restart:
 npm run dev
 ```
 
-## 🧪 Testing the API
+## Testing the API
 
 ### Option 1: Use the Web Interface
 Open `http://localhost:3000` and use the web interface
@@ -116,7 +116,7 @@ Invoke-RestMethod -Uri "http://localhost:3000/process-meeting" -Method POST -For
 - **Type**: File
 - **Value**: Select `samples/meeting1.txt` or `samples/meeting2.txt`
 
-## 📋 Sample Output
+## Sample Output
 
 ```json
 {
@@ -147,7 +147,7 @@ Invoke-RestMethod -Uri "http://localhost:3000/process-meeting" -Method POST -For
 }
 ```
 
-## ⚠️ Error Responses
+## Error Responses
 
 ### 400 - Bad Request
 ```json
@@ -181,7 +181,7 @@ Invoke-RestMethod -Uri "http://localhost:3000/process-meeting" -Method POST -For
 }
 ```
 
-## 🚀 Additional Testing
+## Additional Testing
 
 ### Automated Tests
 ```bash
@@ -197,7 +197,7 @@ npm test
 k6 run stress-test.py
 ```
 
-## ⚙️ Configuration
+## ENV Configuration
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -209,7 +209,7 @@ k6 run stress-test.py
 - **File Type**: Only `.txt` files
 - **Text Length**: Max 50,000 characters
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 meeting-minutes-extractor/
@@ -228,10 +228,10 @@ meeting-minutes-extractor/
     └── meeting2.txt      # Complex meeting example
 ```
 
-## 💡 Key Features Demonstrated
+## Key Features Demonstrated
 
-✅ **Full-Stack Development**: Backend API + Frontend Interface  
-✅ **AI Integration**: Google Gemini API implementation  
-✅ **Modern UX**: Responsive design with loading states  
-✅ **Production Ready**: Error handling, validation, testing  
-✅ **Performance**: Stress tested for 6-10 second AI processing using Grafana K6
+- **Full-Stack Development**: Backend API + Frontend Interface (Deployed)
+- **AI Integration**: Google Gemini API implementation  
+- **Modern UX**: Responsive design with loading states  
+- **Production Ready**: Error handling, validation, testing  
+- **Performance**: Stress tested for 6-10 second AI processing using Grafana K6
